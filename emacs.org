@@ -1,0 +1,141 @@
+#+TITLE: Maxim's Emacs Config
+#+AUHTOR: Maxim Rebguns
+
+* Introduction
+  I'm new to Emacs. This file is an attempt to make my Emacs config
+  using literate programming with Org Mode and Org Babel. What this
+  means is that all the code for my configuration is here, wrapped in
+  =BEGIN_SRC= and =END_SRC=. This makes my config very readable and it
+  can be published without an issue.
+
+** How this works
+   All the Org files in my Emacs directory are taken by =init.el= and
+   transformed into Elisp files which are then loaded into Emacs. The
+   following files can be found in my configuration:
+
+   + =init.el= -- This script loads all literate Org files in the
+     Emacs directory.
+   + =emacs.org= -- This is my main configuration file---the one
+     you're viewing right now.
+
+* Package Loading
+  Set up package sources and the system for loading packages further
+  down in this document.
+  
+** Melpa
+   Add [[https://melpa.org/][Melpa]] to the to the list of sources.
+   
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (add-to-list 'package-archives
+		  '("melpa" . "https://melpa.org/packages/")
+		  t)
+     (package-initialize)
+   #+END_SRC
+
+** Set up use-package
+   If [[https://github.com/jwiegley/use-package][use-package]] is not installed, then do so.
+
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'use-package)
+       (package-refresh-contents)
+       (package-install 'use-package))
+     (require 'use-package)
+   #+END_SRC
+
+   Make sure packages are automatically installed if they weren't
+   already.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq use-package-always-ensure t)
+   #+END_SRC
+
+* Appearance
+  Customize the appearance of Emacs with themes and disabling some
+  default modes.
+
+** Theme
+  Set the theme to [[https://github.com/nashamri/spacemacs-theme][Spacemacs]]. The original code I used by getting the
+  theme with use-package and then setting it up with config didn't
+  work. [[https://github.com/nashamri/spacemacs-theme/issues/42#issuecomment-236437989][This GitHub comment proposed a solution that works.]]
+  
+  #+BEGIN_SRC emacs-lisp
+    (use-package spacemacs-common
+      :ensure spacemacs-theme
+      :init (load-theme 'spacemacs-dark t))
+  #+END_SRC
+
+** UI Components
+   With the new theme, UI components like the tool bar, menu bar and
+   scrollbar are ugly. The following code removes them, leaving the
+   menu bar up in terminal mode.
+
+   #+BEGIN_SRC emacs-lisp
+     (tool-bar-mode -1)
+     (scroll-bar-mode -1)
+     ;; If running in a graphical display.
+     (if (display-graphic-p)
+	 (menu-bar-mode -1)
+       (menu-bar-mode 1))
+   #+END_SRC
+
+* Functionality
+  This section changes the Emacs functionality by customizing built-in
+  configuration variables.
+  
+** Indentation
+   I /hate/ the fact that Emacs "tabifies" text by default.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default indent-tabs-mode nil)
+   #+END_SRC
+   
+* Mode Configuration
+  This section adds packages for various other modes not implemented
+  in Emacs by default, such as the Markdown mode. It also defines
+  configuration values for various emacs modes.
+
+  
+** CSS
+   CSS Mode is built-in to emacs, but I like my CSS indent to be 2,
+   but the default is 4, so I'm setting it to two here.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default css-indent-offset 2)
+   #+END_SRC
+   
+** Markdown
+   Markdown is implemented with [[https://github.com/jrblevin/markdown-mode][markdown-mode]].
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package markdown-mode)
+   #+END_SRC
+
+** YAML
+   The mode I use for YAML is [[https://github.com/yoshiki/yaml-mode][yaml-mode]].
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode)
+   #+END_SRC
+
+** JavaScript
+   For JS, I used the enhanced [[https://github.com/mooz/js2-mode/][js2-mode]].
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package js2-mode
+       :init (setq-default js-indent-level 2))
+   #+END_SRC
+
+** Org Mode
+   This section customizes the pre-installed [[https://orgmode.org][Org Mode]], a tool for
+   planning and note taking.
+
+*** Org Babel
+    This subsection customizes Org Babel, a tool in Org Mode that
+    provides literate programming tools for code blocks.
+
+    Load Python.
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'ob-python)
+    #+END_SRC

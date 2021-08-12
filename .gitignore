@@ -1,0 +1,17 @@
+# Auto save files and recovery files.
+*~
+\#*\#
+
+# .el files generated from .org.
+emacs.el
+
+# Directories generated from various Emacs
+# commands.
+/auto-save-list/
+/elpa/
+/url/
+
+# Game saves.
+/games/*
+!/games/tetris-scores
+

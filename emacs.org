@@ -139,3 +139,27 @@
     #+BEGIN_SRC emacs-lisp
       (require 'ob-python)
     #+END_SRC
+
+** Dockerfile mode
+   Here is a mode for Dockerfiles called [[https://github.com/spotify/dockerfile-mode][dockerfile-mode]].
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package dockerfile-mode)
+   #+END_SRC
+
+** Jinja2 mode
+   Here I use [[https://github.com/paradoxxxzero/jinja2-mode][jinja2-mode]], a major mode for the Jinja2 template
+   language.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package jinja2-mode)
+   #+END_SRC
+
+** Magit
+   [[https://magit.vc][Magit]] is a Git interface for Emacs. It is extremely powerful and
+   praised as an extremely helpful tool.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit)
+   #+END_SRC
+

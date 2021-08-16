@@ -66,23 +66,26 @@
   #+END_SRC
 
 ** UI Components
-   With the new theme, UI components like the tool bar, menu bar and
-   scrollbar are ugly. The following code removes them, leaving the
-   menu bar up in terminal mode.
+   With the new theme, UI components like the tool bar and scrollbar
+   are ugly.
 
    #+BEGIN_SRC emacs-lisp
      (tool-bar-mode -1)
      (scroll-bar-mode -1)
-     ;; If running in a graphical display.
-     (if (display-graphic-p)
-	 (menu-bar-mode -1)
-       (menu-bar-mode 1))
+     (menu-bar-mode -1)
    #+END_SRC
 
 * Functionality
   This section changes the Emacs functionality by customizing built-in
   configuration variables.
-  
+
+** Initial buffer choice
+   I created a custom startup screen for emacs. This loads it.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq initial-buffer-choice "~/.emacs.d/startup.txt")
+   #+END_SRC
+
 ** Indentation
    I /hate/ the fact that Emacs "tabifies" text by default.
 

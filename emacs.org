@@ -166,3 +166,9 @@
      (use-package magit)
    #+END_SRC
 
+** AucTeX
+   Install AucTeX for LaTeX from Elpa.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package auctex)
+   #+END_SRC

@@ -166,6 +166,12 @@
      (use-package magit)
    #+END_SRC
 
+   Magit also has [[https://github.com/magit/git-modes][extra modes]] for editing git config files.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package gitignore-mode)
+   #+END_SRC
+
 ** AucTeX
    Install AucTeX for LaTeX from Elpa.
 
